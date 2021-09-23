@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
-	adminHandler "gitlab.com/coffeebeansdev/wru/wru-backend-new-merchant-on-boarding/admin"
-	"gitlab.com/coffeebeansdev/wru/wru-backend-new-merchant-on-boarding/config"
-	"gitlab.com/coffeebeansdev/wru/wru-backend-new-merchant-on-boarding/factory"
-	"gitlab.com/coffeebeansdev/wru/wru-backend-new-merchant-on-boarding/logger"
+	adminHandler "github.com/prakhars1406/OnBoarding/admin"
+	"github.com/prakhars1406/OnBoarding/config"
+	"github.com/prakhars1406/OnBoarding/factory"
+	"github.com/prakhars1406/OnBoarding/logger"
 	"log"
 	"net/http"
 )
@@ -26,7 +26,6 @@ func main() {
 	allowedHeaders := handlers.AllowedHeaders([]string{config.ORIGIN, config.ACCEPT, config.CONTENT_TYPE_HEADER, config.AUTHORIZATION, config.DATE_USED, config.X_REQUESTED_WITH})
 	allowedOrigins := handlers.AllowedOrigins([]string{config.ALL})
 	allowedMethods := handlers.AllowedMethods([]string{http.MethodGet, http.MethodHead, http.MethodPost, http.MethodPut, http.MethodDelete, http.MethodOptions})
-	fmt.Println(AppConfig.MONGO_SERVER)
 	authoriseHandler := adminHandler.AuthoriseHandler(dataStoreClient)
 	registerHandler := adminHandler.RegisterHandler(dataStoreClient)
 	//onBoardHandler := adminHandler.OnBoardHandler(dataStoreClient)

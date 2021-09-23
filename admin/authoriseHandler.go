@@ -2,11 +2,11 @@ package admin
 
 import (
 	"encoding/json"
-	"gitlab.com/coffeebeansdev/wru/wru-backend-new-merchant-on-boarding/config"
-	"gitlab.com/coffeebeansdev/wru/wru-backend-new-merchant-on-boarding/factory"
-	"gitlab.com/coffeebeansdev/wru/wru-backend-new-merchant-on-boarding/logger"
-	"gitlab.com/coffeebeansdev/wru/wru-backend-new-merchant-on-boarding/model"
-	"gitlab.com/coffeebeansdev/wru/wru-backend-new-merchant-on-boarding/utility"
+	"github.com/prakhars1406/OnBoarding/config"
+	"github.com/prakhars1406/OnBoarding/factory"
+	"github.com/prakhars1406/OnBoarding/logger"
+	"github.com/prakhars1406/OnBoarding/model"
+	"github.com/prakhars1406/OnBoarding/utility"
 	"net/http"
 )
 

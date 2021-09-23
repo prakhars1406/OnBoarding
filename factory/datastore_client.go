@@ -1,7 +1,7 @@
 package factory
 
 import (
-	"gitlab.com/coffeebeansdev/wru/wru-backend-new-merchant-on-boarding/model"
+	"github.com/prakhars1406/OnBoarding/model"
 )
 
 type MongoClient interface {

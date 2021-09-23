@@ -1,8 +1,8 @@
 package factory
 
 import (
-	"gitlab.com/coffeebeansdev/wru/wru-backend-new-merchant-on-boarding/utility"
-	"gitlab.com/coffeebeansdev/wru/wru-backend-new-merchant-on-boarding/config"
+	"github.com/prakhars1406/OnBoarding/utility"
+	"github.com/prakhars1406/OnBoarding/config"
 	"gopkg.in/mgo.v2"
 	"time"
 )

@@ -3,9 +3,9 @@ package factory
 import (
 	"errors"
 	"fmt"
-	"gitlab.com/coffeebeansdev/wru/wru-backend-new-merchant-on-boarding/config"
-	"gitlab.com/coffeebeansdev/wru/wru-backend-new-merchant-on-boarding/logger"
-	"gitlab.com/coffeebeansdev/wru/wru-backend-new-merchant-on-boarding/model"
+	"github.com/prakhars1406/OnBoarding/config"
+	"github.com/prakhars1406/OnBoarding/logger"
+	"github.com/prakhars1406/OnBoarding/model"
 	"golang.org/x/crypto/bcrypt"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"

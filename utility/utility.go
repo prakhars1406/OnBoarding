@@ -2,8 +2,8 @@ package utility
 
 import (
 	"errors"
-	. "gitlab.com/coffeebeansdev/wru/wru-backend-new-merchant-on-boarding/config"
-	"gitlab.com/coffeebeansdev/wru/wru-backend-new-merchant-on-boarding/model"
+	. "github.com/prakhars1406/OnBoarding/config"
+	"github.com/prakhars1406/OnBoarding/model"
 	"net/http"
 )
 
