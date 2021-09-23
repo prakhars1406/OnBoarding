@@ -24,7 +24,7 @@ All APIs are documented at [API-document](https://alfred.wru.ai/api/)
 - 2.1) Download and install MongoDB
 
 **3. Creating mongo sims database collection:**<br />
-  - Download and extract json file from the given link: [Json-File](https://drive.google.com/drive/folders/1FN-ZE79U3yLMN7gdYEKwy1uR8SVECbZi?usp=sharing)<br />
+  - Download and extract json file from the given link: [Json-File]()<br />
 
  >**Note:** Skip 3.3, if installed using Docker compose file <br />
   - 3.1) If using mongo on Docker desktop use the below command<br />
@@ -78,7 +78,7 @@ All APIs are documented at [API-document](https://alfred.wru.ai/api/)
   - 4.1) Run the below command to clone
 
       - `git --version`                                       
-      - `git clone https://gitlab.com/coffeebeansdev/wru/recommendation-rendering-service.git`
+      - `git clone 
       - `go mod download`
 
   - 4.2) To run the DSS-RRS service execute the below command<br>(This command will be used always to run the service)<br />
