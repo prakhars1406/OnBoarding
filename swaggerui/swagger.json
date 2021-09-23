@@ -1,0 +1,502 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "1.0.0",
+    "title": "Onboard APIs"
+  },
+  "host": "onboard.wru.ai",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Onboard APIs"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/register": {
+      "post": {
+        "tags": [
+          "Onboard APIs"
+        ],
+        "summary": "Register new merchant for onboarding",
+        "description": "",
+        "operationId": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "merchantId",
+            "description": "Merchant ID",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User Contract",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/userContract"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/userEventsSavedResponse"
+            }
+          },
+          "400": {
+            "description": "Error: Bad Request",
+            "example": "Invalid Merchant"
+          }
+        }
+      }
+    },
+    "/{merchantId}/article/v1": {
+      "post": {
+        "tags": [
+          "WRU APIs"
+        ],
+        "summary": "Add/Update an article to the datastore when published",
+        "description": "",
+        "operationId": "addArticle",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "merchantId",
+            "description": "Merchant ID",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Article contract",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/articleContract"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/articleSavedResponse"
+            },
+            "400": {
+              "description": "Error: Bad Request",
+              "example": "Invalid Merchant"
+            }
+          }
+        }
+      }
+    },
+    "/{merchantId}/article/{cid}": {
+      "delete": {
+        "tags": [
+          "WRU APIs"
+        ],
+        "summary": "Delete an article",
+        "description": "",
+        "operationId": "deleteArticle",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "merchantId",
+            "description": "Merchant ID",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "cid",
+            "description": "Article ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/articleSavedResponse"
+            },
+            "400": {
+              "description": "Error: Bad Request",
+              "example": "Invalid Merchant"
+            }
+          }
+        }
+      }
+    },
+    "/{merchantId}?uid={userId}&uaid={uaid}&cid={articleId}&st={strategy}&offset={offset}&count={count}&source=true": {
+      "get": {
+        "tags": [
+          "WRU APIs"
+        ],
+        "summary": "Get Recommendations for the user and the article based on a strategy",
+        "description": "",
+        "operationId": "getRecommendationsForArticle",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "merchantId",
+            "description": "Merchant ID",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "userId",
+            "description": "User ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "cid",
+            "description": "Article ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "st",
+            "description": "Strategy",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "uaid",
+            "description": "Logged in user id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "offset",
+            "description": "Offset for fetching articles from specific position",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "count",
+            "description": "Count for defining number of articles to be fetched from specific position",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/recommendationResponse"
+            }
+          },
+          "400": {
+            "description": "Error: Bad Request",
+            "example": "Invalid Merchant"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "userContract": {
+      "description": "Payload to be passed with the request to trigger User Event",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "User Id",
+          "example": "8e3230f7-5f76-3042-aa4a-d9c46c1243cf"
+        },
+        "cid": {
+          "type": "string",
+          "description": "Article Id",
+          "example": "5df1d965acf557001cfe3492"
+        },
+        "eid": {
+          "type": "string",
+          "description": "Event Id",
+          "example": "EVENT1"
+        },
+        "merchantId": {
+          "type": "string",
+          "description": "Merchant Id",
+          "example": "130919"
+        },
+        "eventType": {
+          "type": "string",
+          "description": "The type of event - RECOMMENDATION_VIEW_EVENT, STORY_VIEW_EVENT or SUBSCRIBED_STORY_VIEW_EVENT",
+          "example": "STORY_VIEW_EVENT"
+        },
+        "ip": {
+          "type": "string",
+          "description": "IP Address",
+          "example": "2405:204:968f:2203:353:c587:4371:8d69"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Timestamp in epoch millis",
+          "example": "1535612530600"
+        },
+        "userAgent": {
+          "type": "string",
+          "description": "The User's browser and platform details",
+          "example": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:84.0) Gecko/20100101 Firefox/84.0"
+        },
+        "sessionId": {
+          "type": "string",
+          "description": "The User's session Id",
+          "example": "9bc995a1-3214-3938-b31e-edbd7ecd8a42"
+        }
+      },
+      "required": [
+        "uid",
+        "cid",
+        "merchantId",
+        "timestamp",
+        "eventType"
+      ]
+    },
+    "articleContract": {
+      "description": "Request details for Article Contract",
+      "properties": {
+        "story": {
+          "type": "object",
+          "$ref": "#/definitions/articleStoryObject"
+        }
+      },
+      "required": [
+        "story"
+      ]
+    },
+    "articleStoryObject": {
+      "description": "Request details for Story Object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Article Id",
+          "example": "9e403fae-f46f-42a5-a29e-758f8cd65f40"
+        },
+        "headline": {
+          "type": "string",
+          "description": "Headline",
+          "example": "Nirmala Sitharaman Arrives in Kyrgystan For SCO"
+        },
+        "author-name": {
+          "type": "string",
+          "description": "Author Name",
+          "example": "PTI"
+        },
+        "published-at": {
+          "type": "integer",
+          "description": "Published At",
+          "example": "1556501365191"
+        },
+        "slug": {
+          "type": "string",
+          "description": "Slug",
+          "example": "news/india/latest-news-breaking-news-28-april-2019"
+        },
+        "image-url": {
+          "type": "string",
+          "description": "Image Url",
+          "example": "thequint/2018-08/55a604c1-8761-476d-9afa-0de4f5de250b/69427343_48c9_447e_be33_4650b9a4bfc4.jpeg"
+        },
+        "text": {
+          "type": "string",
+          "description": "Article text content",
+          "example": "HMD Global, that makes and sells Nokia-branded phones, on Tuesday launched the fourth generation of its feature."
+        },
+        "tags": {
+          "type": "string",
+          "description": "Tags comma-separated",
+          "example": "Dhoni,IPL,Chennai"
+        },
+        "sections": {
+          "type": "string",
+          "description": "Sections colon-separated",
+          "example": "Bollywood:Entertainment"
+        },
+        "content-type": {
+          "type": "string",
+          "description": "Type of content",
+          "example": "story"
+        },
+        "seo" : {
+          "type": "object",
+          "$ref": "#/definitions/articleSeoObject"
+        }
+      },
+      "required": [
+        "id",
+        "headline",
+        "author-name",
+        "published-at",
+        "slug",
+        "image-url",
+        "text",
+        "tags",
+        "sections"
+      ]
+    },
+    "articleSeoObject": {
+      "description": "Request details for Seo Object",
+      "properties": {
+        "meta-description": {
+          "type": "string",
+          "description": "Meta Description",
+          "example": "Total will buy a 20% stake in Adani Green from the promoter group, and half the ownership in solar assets for $2.5 billion, according to a company statement. As of September 2020, the promoter group held 74.92% stake in Adani Green."
+        }
+      }
+    },
+    "userEventsSavedResponse": {
+      "description": "User Events Saved Response from Server",
+      "properties": {
+        "action": {
+          "type": "string",
+          "example": "All user events saved successfully"
+        }
+      }
+    },
+    "articleSavedResponse": {
+      "description": "Article Saved Response from Server",
+      "properties": {
+        "action": {
+          "type": "string",
+          "example": "Article saved"
+        }
+      }
+    },
+    "articleDeletedResponse": {
+      "description": "Article Deleted Response from Server",
+      "properties": {
+        "action": {
+          "type": "string",
+          "example": "Article deleted"
+        }
+      }
+    },
+    "recommendationResponse": {
+      "description": "Recommendation Response from Server",
+      "properties": {
+        "Cid": {
+          "type": "string",
+          "description": "Article Id",
+          "example": "9e403fae-f46f-42a5-a29e-758f8cd65f40"
+        },
+        "SimsScore": {
+          "type": "string",
+          "description": "Sims Score",
+          "example": "2.732394"
+        },
+        "Description": {
+          "type": "string",
+          "description": "Description",
+          "example": "Latest News: Nirmala Sitharaman Arrives in Kyrgystan For SCO"
+        },
+        "Category": {
+          "type": "string",
+          "description": "Category of the Article",
+          "example": "India:World"
+        },
+        "Tags": {
+          "type": "string",
+          "description": "Tags of the Article",
+          "example": "Breaking News,Latest news,"
+        },
+        "PublishedAt": {
+          "type": "string",
+          "description": "Published At",
+          "example": "1556501365191"
+        },
+        "first_published_at": {
+          "type": "string",
+          "description": "First Published At",
+          "example": "1556416561094"
+        },
+        "Timestamp": {
+          "type": "string",
+          "description": "Timestamp",
+          "example": "2019-04-29T01:29:25.191Z"
+        },
+        "Slug": {
+          "type": "string",
+          "description": "Slug",
+          "example": "news/india/latest-news-breaking-news-28-april-2019"
+        },
+        "Model": {
+          "type": "string",
+          "description": "Model",
+          "example": "global"
+        },
+        "Reason": {
+          "type": "string",
+          "description": "Reason",
+          "example": "Found to be trending globally"
+        },
+        "Analysis": {
+          "type": "string",
+          "description": "Analysis",
+          "example": "Found to be trending globally with current view count 540.000000"
+        },
+        "ImageUrl": {
+          "type": "string",
+          "description": "Image Url",
+          "example": "thequint/2018-08/55a604c1-8761-476d-9afa-0de4f5de250b/69427343_48c9_447e_be33_4650b9a4bfc4.jpeg"
+        }
+      },
+      "required": [
+        "Cid",
+        "SimsScore",
+        "Description",
+        "Category",
+        "Tags",
+        "PublishedAt",
+        "first_published_at",
+        "Timestamp",
+        "Slug",
+        "Model",
+        "Reason",
+        "Analysis",
+        "ImageUrl"
+      ]
+    }
+  },
+  "externalDocs": {
+    "description": "WRU",
+    "url": "https://wru.ai"
+  }
+}

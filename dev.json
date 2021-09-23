@@ -1,0 +1,7 @@
+{
+  "APP_MODE":"LOCAL",
+  "PORT" : "9002",
+  "DATASTORE":"mongo",
+  "MONGO_SERVER":"localhost:27017"
+}
+

@@ -1,0 +1,12 @@
+version: '2.1'
+
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./.mongodb-data:/data/db
+
+
+#        export DOCKER_HOST_IP=192.168.99.100
